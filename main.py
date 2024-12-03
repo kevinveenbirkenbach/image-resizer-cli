@@ -1,6 +1,7 @@
 import os
 from PIL import Image
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 
 def resize_image(image_path, percentage, max_width, max_height, max_size, output_path):
     try:
@@ -44,6 +45,11 @@ def parse_size(size_str):
     else:
         raise ValueError("Invalid size format. Use KB, MB, or GB (e.g., '500KB', '2MB').")
 
+def process_image(file_path, output_folder, percentage, max_width, max_height, max_size):
+    """Process a single image file."""
+    output_path = os.path.join(output_folder, os.path.basename(file_path))
+    resize_image(file_path, percentage, max_width, max_height, max_size, output_path)
+
 def resize_images_in_folder(folder_path, percentage, max_width, max_height, max_size):
     # Check for subdirectories
     subdirs = [d for d in os.listdir(folder_path) if os.path.isdir(os.path.join(folder_path, d))]
@@ -53,11 +59,13 @@ def resize_images_in_folder(folder_path, percentage, max_width, max_height, max_
     output_folder = f"{folder_path}_resized"
     os.makedirs(output_folder, exist_ok=True)
 
-    for file_name in os.listdir(folder_path):
-        file_path = os.path.join(folder_path, file_name)
-        if os.path.isfile(file_path):
-            output_path = os.path.join(output_folder, file_name)
-            resize_image(file_path, percentage, max_width, max_height, max_size, output_path)
+    # Get list of image files
+    files = [os.path.join(folder_path, file_name) for file_name in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, file_name))]
+
+    # Process images in parallel
+    with ThreadPoolExecutor() as executor:
+        for file_path in files:
+            executor.submit(process_image, file_path, output_folder, percentage, max_width, max_height, max_size)
 
     print(f"All images resized and saved to: {output_folder}")
 

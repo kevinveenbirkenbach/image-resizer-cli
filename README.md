@@ -1,4 +1,3 @@
-```markdown
 # 📷 Image Resizer CLI
 
 A lightweight and powerful command-line tool for resizing images, designed to tackle the challenge of super huge photo files that are too big to upload to platforms like PixelFed. Simplify your workflow by resizing images quickly and easily! 🚀
@@ -96,4 +95,3 @@ For more details, see the [LICENSE file](https://www.gnu.org/licenses/agpl-3.0.e
 ## 🛠️ Contributions
 
 Feel free to fork, contribute, and submit pull requests. Let’s make image resizing even better! 😊
-```

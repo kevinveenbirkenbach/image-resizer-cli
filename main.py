@@ -45,6 +45,11 @@ def parse_size(size_str):
         raise ValueError("Invalid size format. Use KB, MB, or GB (e.g., '500KB', '2MB').")
 
 def resize_images_in_folder(folder_path, percentage, max_width, max_height, max_size):
+    # Check for subdirectories
+    subdirs = [d for d in os.listdir(folder_path) if os.path.isdir(os.path.join(folder_path, d))]
+    if subdirs:
+        raise Exception(f"Error: The folder '{folder_path}' contains subdirectories, which is not supported.")
+
     output_folder = f"{folder_path}_resized"
     os.makedirs(output_folder, exist_ok=True)
 
@@ -70,6 +75,10 @@ if __name__ == "__main__":
         output_path = f"{os.path.splitext(args.input_path)[0]}_resized{os.path.splitext(args.input_path)[1]}"
         resize_image(args.input_path, args.percentage, args.max_width, args.max_height, args.max_size, output_path)
     elif os.path.isdir(args.input_path):  # Input is a folder
-        resize_images_in_folder(args.input_path, args.percentage, args.max_width, args.max_height, args.max_size)
+        try:
+            resize_images_in_folder(args.input_path, args.percentage, args.max_width, args.max_height, args.max_size)
+        except Exception as e:
+            print(e)
     else:
         print("Invalid input path. Please provide a valid file or folder path.")
+

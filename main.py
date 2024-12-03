@@ -14,7 +14,7 @@ def resize_image(image_path, percentage, max_width, max_height, max_size, output
             else:
                 new_size = (img.width, img.height)
 
-            img_resized = img.resize(new_size, Image.ANTIALIAS)
+            img_resized = img.resize(new_size, Image.Resampling.LANCZOS)
 
             # Adjust quality to meet max size
             if max_size:

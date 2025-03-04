@@ -1,67 +1,48 @@
-# 📷 Image Resizer CLI
+# 📷 Image Resizer CLI (imgrszr)
 
-A lightweight and powerful command-line tool for resizing images, designed to tackle the challenge of super huge photo files that are too big to upload to platforms like PixelFed. Simplify your workflow by resizing images quickly and easily! 🚀
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0.en.html) [![GitHub stars](https://img.shields.io/github/stars/kevinveenbirkenbach/image-resizer-cli.svg?style=social)](https://github.com/kevinveenbirkenbach/image-resizer-cli/stargazers)
+
+Image Resizer CLI is a lightweight and powerful command-line tool for resizing images, designed to tackle huge photo files that are too big to upload to platforms like PixelFed. Simplify your workflow by resizing images quickly and easily! 🚀
 
 ## 🛠 Features
 
 - 🌟 Resize images by percentage (e.g., 75%)
 - 📐 Resize to maximum dimensions (width/height)
-- 💾 Adjust images to fit a specific file size (e.g., 500KB, 2MB)
-- 🖼️ Support for single images or entire folders
-- 🗂️ Automatically saves resized files with a `_resized` suffix
-
----
-
-## 🏗️ Why This Script?
-
-This tool was created after frequently receiving super huge photo files that were too large to upload to **PixelFed**. Instead of manually resizing them, this script automates the process and ensures the files are optimized for upload.
-
----
-
-## 📋 Prerequisites
-
-Make sure you have the following installed:
-
-1. **Python 3.6+**
-2. **Pillow** (Python Imaging Library)
-
-Install Pillow using pip:
-```bash
-pip install pillow
-```
+- 💾 Adjust images to meet a specific file size (e.g., 500KB, 2MB)
+- 🖼️ Support for processing a single image or an entire folder
+- 🗂️ Automatically saves resized files with a `_resized` suffix or creates a new output folder
 
 ---
 
 ## 📥 Installation
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/your-repo/image-resizer-cli.git
-   ```
-2. Navigate to the folder:
-   ```bash
-   cd image-resizer-cli
-   ```
+Install Image Resizer CLI easily via [Kevin's Package Manager](https://github.com/kevinveenbirkenbach/package-manager) under the alias `imgrszr`:
+
+```bash
+package-manager install imgrszr
+```
+
+This command makes the tool globally available as `imgrszr` in your terminal. 🔧
 
 ---
 
 ## 🚀 Usage
 
-The script is saved as `main.py`. Run it using Python:
+Run the tool using the alias:
 
 ### Resize a single image:
 ```bash
-python main.py path/to/image.jpg --percentage 75
+imgrszr path/to/image.jpg --percentage 75
 ```
 
 ### Resize all images in a folder:
 ```bash
-python main.py path/to/folder --max-width 800 --max-height 600
+imgrszr path/to/folder --max-width 800 --max-height 600
 ```
 
-### Resize to fit within 500KB:
+### Resize an image to fit within 500KB:
 ```bash
-python main.py path/to/image.jpg --max-size 500KB
+imgrszr path/to/image.jpg --max-size 500KB
 ```
 
 ### Options:
@@ -71,27 +52,25 @@ python main.py path/to/image.jpg --max-size 500KB
 - `--max-size`: Target file size (e.g., `500KB`, `2MB`)
 
 ### Output:
-- Resized files will automatically include the `_resized` suffix.
-- For folders, a new folder named `<original_folder>_resized` is created.
+- Resized files are saved with a `_resized` suffix.
+- When processing folders, a new folder named `<original_folder>_resized` is created.
 
 ---
 
 ## 🧑‍💻 Author
 
-Created by **Kevin Veen-Birkenbach** with the help of **ChatGPT**  
-🌐 [cybermaster.space](https://cybermaster.space/)  
-
-This script was developed in collaboration with OpenAI's ChatGPT. You can view the conversation that led to its creation [here](https://chatgpt.com/share/674f246d-661c-800f-a2e5-9ae920bcd03b).
+Created by **Kevin Veen-Birkenbach** with the assistance of **ChatGPT**  
+🌐 [cybermaster.space](https://cybermaster.space/)
 
 ---
 
 ## 📜 License
 
-This script is licensed under the **GNU Affero General Public License, Version 3, 19 November 2007**.  
-For more details, see the [LICENSE file](https://www.gnu.org/licenses/agpl-3.0.en.html).
+This project is licensed under the **GNU Affero General Public License, Version 3, 19 November 2007**.  
+For more details, see the [LICENSE](https://www.gnu.org/licenses/agpl-3.0.en.html).
 
 ---
 
-## 🛠️ Contributions
+## 🤝 Contributions
 
-Feel free to fork, contribute, and submit pull requests. Let’s make image resizing even better! 😊
+Contributions are welcome! Feel free to fork, submit pull requests, and help us improve image resizing for everyone. 😊

@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os
 from PIL import Image
 import argparse
@@ -72,7 +74,7 @@ def resize_images_in_folder(folder_path, percentage, max_width, max_height, max_
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Resize images or all images in a folder.")
     parser.add_argument("input_path", help="Path to an image or a folder containing images")
-    parser.add_argument("--percentage", type=int, help="Percentage to resize (e.g., 75 for 75%)", default=None)
+    parser.add_argument("--percentage", type=int, help="Percentage to resize (e.g., 75 for 75%%)", default=None)
     parser.add_argument("--max-width", type=int, help="Maximum width for resized images", default=None)
     parser.add_argument("--max-height", type=int, help="Maximum height for resized images", default=None)
     parser.add_argument("--max-size", type=str, help="Maximum file size (e.g., '500KB', '2MB')", default=None)

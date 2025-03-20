@@ -52,13 +52,14 @@ def process_image(file_path, output_folder, percentage, max_width, max_height, m
     output_path = os.path.join(output_folder, os.path.basename(file_path))
     resize_image(file_path, percentage, max_width, max_height, max_size, output_path)
 
-def resize_images_in_folder(folder_path, percentage, max_width, max_height, max_size):
+def resize_images_in_folder(folder_path, percentage, max_width, max_height, max_size, output_folder=None):
     # Check for subdirectories
     subdirs = [d for d in os.listdir(folder_path) if os.path.isdir(os.path.join(folder_path, d))]
     if subdirs:
         raise Exception(f"Error: The folder '{folder_path}' contains subdirectories, which is not supported.")
 
-    output_folder = f"{folder_path}_resized"
+    if not output_folder:
+        output_folder = f"{folder_path}_resized"
     os.makedirs(output_folder, exist_ok=True)
 
     # Get list of image files
@@ -78,17 +79,20 @@ if __name__ == "__main__":
     parser.add_argument("--max-width", type=int, help="Maximum width for resized images", default=None)
     parser.add_argument("--max-height", type=int, help="Maximum height for resized images", default=None)
     parser.add_argument("--max-size", type=str, help="Maximum file size (e.g., '500KB', '2MB')", default=None)
+    parser.add_argument("--output", type=str, help="Optional output path for resized image or folder", default=None)
 
     args = parser.parse_args()
 
     if os.path.isfile(args.input_path):  # Input is a single file
-        output_path = f"{os.path.splitext(args.input_path)[0]}_resized{os.path.splitext(args.input_path)[1]}"
+        if args.output:
+            output_path = args.output
+        else:
+            output_path = f"{os.path.splitext(args.input_path)[0]}_resized{os.path.splitext(args.input_path)[1]}"
         resize_image(args.input_path, args.percentage, args.max_width, args.max_height, args.max_size, output_path)
     elif os.path.isdir(args.input_path):  # Input is a folder
         try:
-            resize_images_in_folder(args.input_path, args.percentage, args.max_width, args.max_height, args.max_size)
+            resize_images_in_folder(args.input_path, args.percentage, args.max_width, args.max_height, args.max_size, args.output)
         except Exception as e:
             print(e)
     else:
         print("Invalid input path. Please provide a valid file or folder path.")
-
